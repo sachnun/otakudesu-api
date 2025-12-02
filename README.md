@@ -2,6 +2,8 @@
 
 REST API untuk scraping data anime dari [Otakudesu](https://otakudesu.best). Dibangun dengan NestJS.
 
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates?repo=sachnun/otakudesu-api)
+
 ## Features
 
 - Homepage (ongoing & completed anime)
