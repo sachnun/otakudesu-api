@@ -47,23 +47,6 @@ Server akan berjalan di `http://localhost:3000`
 
 Swagger UI tersedia di `http://localhost:3000/docs`
 
-## API Endpoints
-
-| Method | Endpoint                              | Description                          |
-| ------ | ------------------------------------- | ------------------------------------ |
-| GET    | `/api/home`                           | Homepage - ongoing & completed anime |
-| GET    | `/api/ongoing?page=1`                 | Ongoing anime list                   |
-| GET    | `/api/complete?page=1`                | Completed anime list                 |
-| GET    | `/api/anime-list`                     | All anime A-Z                        |
-| GET    | `/api/anime/:slug`                    | Anime detail                         |
-| GET    | `/api/episode/:slug`                  | Episode detail                       |
-| GET    | `/api/genres`                         | All genres                           |
-| GET    | `/api/genres/:genre?page=1`           | Anime by genre                       |
-| GET    | `/api/schedule`                       | Weekly release schedule              |
-| GET    | `/api/search?q=keyword`               | Search anime                         |
-| POST   | `/api/resolve-streaming`              | Resolve streaming URL                |
-| GET    | `/api/resolve-streaming/:dataContent` | Resolve streaming URL (GET)          |
-
 ## Response Format
 
 Semua response menggunakan format konsisten:
