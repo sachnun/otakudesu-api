@@ -254,7 +254,11 @@ export class OtakudesuService {
   async getAnimeDetail(slug: string): Promise<AnimeDetail> {
     const $ = await this.fetchHtml(`${this.baseUrl}/anime/${slug}/`);
 
-    const title = $('.jdlrx h1').text().trim();
+    const title = $('.jdlrx h1')
+      .text()
+      .trim()
+      .replace(/(\s*Subtitle Indonesia)+$/i, '')
+      .trim();
     const poster = $('.fotoanime img').attr('src') || '';
 
     // Check if anime exists (title is empty means not found)
