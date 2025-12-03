@@ -257,7 +257,8 @@ export class OtakudesuService {
     const title = $('.jdlrx h1')
       .text()
       .trim()
-      .replace(/(\s*Subtitle Indonesia)+$/i, '')
+      .replace(/\s*\(Episode\s*\d+\s*[-–]\s*\d+\)\s*/i, '')
+      .replace(/(\s*(Subtitle Indonesia|Sub Indo))+$/i, '')
       .trim();
     const poster = $('.fotoanime img').attr('src') || '';
 
