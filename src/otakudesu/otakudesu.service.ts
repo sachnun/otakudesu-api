@@ -35,7 +35,7 @@ export class OtakudesuService {
         headers: this.headers,
         timeout: 10000,
       });
-      return cheerio.load(response.data);
+      return cheerio.load(response.data as string);
     } catch {
       throw new HttpException(
         `Failed to fetch data from ${url}`,
@@ -344,9 +344,9 @@ export class OtakudesuService {
     // Extract anime title from the episode title (remove "Episode X Subtitle Indonesia")
     const animeTitle = title.replace(/\s*Episode\s*\d+.*$/i, '').trim();
 
-    // Navigation
-    const prevLink = $('.flir a:contains("Sebelumnya")').attr('href') || '';
-    const nextLink = $('.flir a:contains("Selanjutnya")').attr('href') || '';
+    // Navigation - Otakudesu uses "Previous Eps." and "Next Eps." for navigation
+    const prevLink = $('.flir a:contains("Previous")').attr('href') || '';
+    const nextLink = $('.flir a:contains("Next")').attr('href') || '';
 
     // Streaming URL (default player)
     const streamingUrl = $('#embed_holder iframe').attr('src') || '';
