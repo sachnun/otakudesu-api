@@ -3,6 +3,10 @@
 /node_modules
 /build
 
+# Wrangler
+.wrangler/
+.dev.vars
+
 # Logs
 logs
 *.log
