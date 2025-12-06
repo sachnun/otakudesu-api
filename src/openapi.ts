@@ -2,48 +2,8 @@ export const openApiSpec = {
   openapi: "3.0.3",
   info: {
     title: "Otakudesu API",
-    description: `REST API for scraping anime data from Otakudesu.
-
-## Features
-- Ongoing and completed anime listings
-- Detailed anime and episode information
-- Streaming video player URL resolution
-- Multi-resolution download links
-- Anime search functionality
-- Genre-based filtering
-- Weekly release schedule
-
-## Response Format
-All successful responses follow this structure:
-\`\`\`json
-{
-  "success": true,
-  "statusCode": 200,
-  "message": "OK",
-  "data": { ... },
-  "timestamp": "2025-12-06T09:00:00.000Z",
-  "path": "/api/...",
-  "responseTime": "123ms"
-}
-\`\`\`
-
-## Error Handling
-Error responses follow this structure:
-\`\`\`json
-{
-  "success": false,
-  "statusCode": 404,
-  "message": "Error description",
-  "error": { "code": "ERROR_CODE" },
-  "timestamp": "2025-12-06T09:00:00.000Z",
-  "path": "/api/..."
-}
-\`\`\``,
+    description: "REST API for scraping anime data from Otakudesu.",
     version: "1.0.0",
-    contact: {
-      name: "Otakudesu API",
-      url: "https://github.com/YOUR_USERNAME/otakudesu-api",
-    },
     license: {
       name: "MIT",
       url: "https://opensource.org/licenses/MIT",
