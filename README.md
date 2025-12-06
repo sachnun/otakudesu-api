@@ -1,104 +1,118 @@
 # Otakudesu API
 
-REST API untuk scraping data anime dari [Otakudesu](https://otakudesu.best). Dibangun dengan NestJS.
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR_USERNAME/otakudesu-api)
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates?repo=sachnun/otakudesu-api)
+REST API for scraping anime data from Otakudesu. Built with [Hono](https://hono.dev/) and deployed to Cloudflare Workers.
 
 ## Features
 
-- Homepage (ongoing & completed anime)
-- Ongoing anime list dengan pagination
-- Completed anime list dengan pagination
-- Anime list A-Z
-- Anime detail (info, synopsis, episodes)
-- Episode detail dengan streaming servers & download links
-- Genre list & filter by genre
+- Ongoing and completed anime listings
+- Detailed anime and episode information
+- Streaming video player URL resolution
+- Multi-resolution download links
+- Anime search functionality
+- Genre-based filtering
 - Weekly release schedule
-- Search anime
-- Resolve streaming URL
 
-## Tech Stack
-
-- **Framework:** NestJS
-- **Scraping:** Axios + Cheerio
-- **Documentation:** Swagger/OpenAPI
-- **Caching:** In-memory cache (5-10 min TTL)
-
-## Installation
+## Getting Started
 
 ```bash
 npm install
+npm run dev
 ```
 
-## Running the app
+## Deployment
 
 ```bash
-# development
-npm run start
-
-# watch mode
-npm run start:dev
-
-# production mode
-npm run start:prod
+npm run deploy
 ```
 
-Server akan berjalan di `http://localhost:3000`
+## API Reference
 
-## API Documentation
-
-Swagger UI tersedia di `http://localhost:3000/docs`
-
-## Response Format
-
-Semua response menggunakan format konsisten:
+All endpoints return responses in the following format:
 
 ```json
 {
   "success": true,
   "statusCode": 200,
   "message": "OK",
-  "data": { ... },
-  "timestamp": "2024-11-12T10:00:00.000Z",
-  "path": "/api/home",
-  "responseTime": "123ms"
+  "data": {},
+  "timestamp": "ISO 8601",
+  "path": "/api/...",
+  "responseTime": "ms"
 }
 ```
 
-## Testing
+### Endpoints
 
-```bash
-# unit tests
-npm run test
+#### Home
 
-# test coverage
-npm run test:cov
+| Method | Endpoint    | Description                        |
+| ------ | ----------- | ---------------------------------- |
+| `GET`  | `/api/home` | Latest ongoing and completed anime |
 
-# e2e tests
-npm run test:e2e
-```
+#### Anime
 
-## Project Structure
+| Method | Endpoint           | Description                        |
+| ------ | ------------------ | ---------------------------------- |
+| `GET`  | `/api/ongoing`     | Currently airing anime (paginated) |
+| `GET`  | `/api/complete`    | Completed anime (paginated)        |
+| `GET`  | `/api/anime-list`  | All anime sorted alphabetically    |
+| `GET`  | `/api/anime/:slug` | Anime details with episode list    |
 
-```
-src/
-├── common/
-│   ├── filters/          # Exception filters
-│   ├── interceptors/     # Response interceptors
-│   └── interfaces/       # Common interfaces
-├── otakudesu/
-│   ├── dto/              # Data transfer objects
-│   ├── interfaces/       # Otakudesu interfaces
-│   ├── otakudesu.controller.ts
-│   ├── otakudesu.service.ts
-│   └── otakudesu.module.ts
-├── app.module.ts
-└── main.ts
-```
+#### Episode
 
-## Disclaimer
+| Method | Endpoint             | Description                          |
+| ------ | -------------------- | ------------------------------------ |
+| `GET`  | `/api/episode/:slug` | Episode streaming and download links |
 
-API ini hanya untuk keperluan edukasi. Semua konten anime berasal dari Otakudesu. Gunakan dengan bijak.
+#### Genre
+
+| Method | Endpoint             | Description                |
+| ------ | -------------------- | -------------------------- |
+| `GET`  | `/api/genres`        | Available genres           |
+| `GET`  | `/api/genres/:genre` | Anime by genre (paginated) |
+
+#### Schedule
+
+| Method | Endpoint        | Description             |
+| ------ | --------------- | ----------------------- |
+| `GET`  | `/api/schedule` | Weekly release schedule |
+
+#### Search
+
+| Method | Endpoint         | Description             |
+| ------ | ---------------- | ----------------------- |
+| `GET`  | `/api/search?q=` | Search anime by keyword |
+
+#### Streaming
+
+| Method | Endpoint                              | Description                 |
+| ------ | ------------------------------------- | --------------------------- |
+| `POST` | `/api/resolve-streaming`              | Resolve streaming URL       |
+| `GET`  | `/api/resolve-streaming/:dataContent` | Resolve streaming URL (GET) |
+
+### Query Parameters
+
+| Parameter | Endpoints                                 | Description              |
+| --------- | ----------------------------------------- | ------------------------ |
+| `page`    | `/ongoing`, `/complete`, `/genres/:genre` | Page number (default: 1) |
+| `q`       | `/search`                                 | Search keyword           |
+
+### Error Codes
+
+| Code                | Description                      |
+| ------------------- | -------------------------------- |
+| `ANIME_NOT_FOUND`   | Requested anime does not exist   |
+| `EPISODE_NOT_FOUND` | Requested episode does not exist |
+| `UPSTREAM_ERROR`    | Failed to fetch data from source |
+| `BAD_REQUEST`       | Invalid request parameters       |
+
+## Tech Stack
+
+- **Runtime**: Cloudflare Workers
+- **Framework**: Hono
+- **Parser**: Cheerio
 
 ## License
 
