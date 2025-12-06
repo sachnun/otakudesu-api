@@ -14,99 +14,39 @@ REST API for scraping anime data from Otakudesu. Built with [Hono](https://hono.
 - Genre-based filtering
 - Weekly release schedule
 
-## Getting Started
+## Installation
 
 ```bash
 npm install
+```
+
+## Development
+
+```bash
 npm run dev
 ```
 
+The server will start at `http://localhost:8787`. API documentation is available at `/docs`.
+
 ## Deployment
 
+### Option 1: Deploy Button
+
+Click the "Deploy to Cloudflare Workers" button above.
+
+### Option 2: Manual Deploy
+
 ```bash
+# Login to Cloudflare (first time only)
+npx wrangler login
+
+# Deploy to Cloudflare Workers
 npm run deploy
 ```
 
-## API Reference
+## Documentation
 
-All endpoints return responses in the following format:
-
-```json
-{
-  "success": true,
-  "statusCode": 200,
-  "message": "OK",
-  "data": {},
-  "timestamp": "ISO 8601",
-  "path": "/api/...",
-  "responseTime": "ms"
-}
-```
-
-### Endpoints
-
-#### Home
-
-| Method | Endpoint    | Description                        |
-| ------ | ----------- | ---------------------------------- |
-| `GET`  | `/api/home` | Latest ongoing and completed anime |
-
-#### Anime
-
-| Method | Endpoint           | Description                        |
-| ------ | ------------------ | ---------------------------------- |
-| `GET`  | `/api/ongoing`     | Currently airing anime (paginated) |
-| `GET`  | `/api/complete`    | Completed anime (paginated)        |
-| `GET`  | `/api/anime-list`  | All anime sorted alphabetically    |
-| `GET`  | `/api/anime/:slug` | Anime details with episode list    |
-
-#### Episode
-
-| Method | Endpoint             | Description                          |
-| ------ | -------------------- | ------------------------------------ |
-| `GET`  | `/api/episode/:slug` | Episode streaming and download links |
-
-#### Genre
-
-| Method | Endpoint             | Description                |
-| ------ | -------------------- | -------------------------- |
-| `GET`  | `/api/genres`        | Available genres           |
-| `GET`  | `/api/genres/:genre` | Anime by genre (paginated) |
-
-#### Schedule
-
-| Method | Endpoint        | Description             |
-| ------ | --------------- | ----------------------- |
-| `GET`  | `/api/schedule` | Weekly release schedule |
-
-#### Search
-
-| Method | Endpoint         | Description             |
-| ------ | ---------------- | ----------------------- |
-| `GET`  | `/api/search?q=` | Search anime by keyword |
-
-#### Streaming
-
-| Method | Endpoint                              | Description                 |
-| ------ | ------------------------------------- | --------------------------- |
-| `POST` | `/api/resolve-streaming`              | Resolve streaming URL       |
-| `GET`  | `/api/resolve-streaming/:dataContent` | Resolve streaming URL (GET) |
-
-### Query Parameters
-
-| Parameter | Endpoints                                 | Description              |
-| --------- | ----------------------------------------- | ------------------------ |
-| `page`    | `/ongoing`, `/complete`, `/genres/:genre` | Page number (default: 1) |
-| `q`       | `/search`                                 | Search keyword           |
-
-### Error Codes
-
-| Code                | Description                      |
-| ------------------- | -------------------------------- |
-| `ANIME_NOT_FOUND`   | Requested anime does not exist   |
-| `EPISODE_NOT_FOUND` | Requested episode does not exist |
-| `UPSTREAM_ERROR`    | Failed to fetch data from source |
-| `BAD_REQUEST`       | Invalid request parameters       |
+Interactive API documentation (Swagger UI) is available at `/docs` endpoint.
 
 ## Tech Stack
 
